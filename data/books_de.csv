@@ -1,0 +1,67 @@
+BookID,OsisID,BookName,TotalChapters
+1,1Mo,1. Mose,50
+2,2Mo,2. Mose,40
+3,3Mo,3. Mose,27
+4,4Mo,4. Mose,36
+5,5Mo,5. Mose,34
+6,Jos,Josua,24
+7,Rich,Richter,21
+8,Rut,Rut,4
+9,1Sam,1. Samuel,31
+10,2Sam,2. Samuel,24
+11,1Kön,1. Könige,22
+12,2Kön,2. Könige,25
+13,1Chr,1. Chronik,29
+14,2Chr,2. Chronik,36
+15,Esra,Esra,10
+16,Neh,Nehemia,13
+17,Est,Esther,10
+18,Hiob,Hiob,42
+19,Ps,Psalmen,150
+20,Spr,Sprüche,31
+21,Pred,Prediger,12
+22,Hl,Hoheslied,8
+23,Jes,Jesaja,66
+24,Jer,Jeremia,52
+25,Kl,Klagelieder,5
+26,Hes,Hesekiel,48
+27,Dan,Daniel,12
+28,Hos,Hosea,14
+29,Joel,Joel,3
+30,Am,Amos,9
+31,Ob,Obadja,1
+32,Jona,Jona,4
+33,Mic,Micha,7
+34,Nah,Nahum,3
+35,Hab,Habakuk,3
+36,Zef,Zefanja,3
+37,Hag,Haggai,2
+38,Sach,Sacharja,14
+39,Mal,Maleachi,4
+40,Mt,Matthäus,28
+41,Mk,Markus,16
+42,Lk,Lukas,24
+43,Joh,Johannes,21
+44,Ap,Apostelgeschichte,28
+45,Röm,Römer,16
+46,1Kor,1. Korinther,16
+47,2Kor,2. Korinther,13
+48,Gal,Galater,6
+49,Eph,Epheser,6
+50,Phil,Philipper,4
+51,Kol,Kolosser,4
+52,1Thess,1. Thessalonicher,5
+53,2Thess,2. Thessalonicher,3
+54,1Tim,1. Timotheus,6
+55,2Tim,2. Timotheus,4
+56,Titus,Titus,3
+57,Phil,Philemon,1
+58,Hebr,Hebräer,13
+59,Jak,Jakobus,5
+60,1Petr,1. Petrus,5
+61,2Petr,2. Petrus,3
+62,1Joh,1. Johannes,5
+63,2Joh,2. Johannes,1
+64,3Joh,3. Johannes,1
+65,Jud,Judas,1
+66,Off,Offenbarung,22
