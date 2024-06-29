@@ -32,6 +32,10 @@ In the Mastodon settings there is the "Development" section and there the
 ### Signal
 
 Posts the message as a Signal message in as many direct chats and/or groups as you like. 
+This is implemented via [signal-cli](https://github.com/AsamK/signal-cli) which has
+to be set up separately - see 
+[Installation](https://github.com/AsamK/signal-cli/wiki/DBus-service#system-bus)
+and [Einrichtung](https://github.com/AsamK/signal-cli/wiki/Registration-with-captcha)).
 Access to signal-cli is via DBus. Required settings for the bot:
 
 - `sender`: the number that should send the messages (must be configured in signal-cli)
