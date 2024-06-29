@@ -1,5 +1,6 @@
 from random import randint
 from os.path import isfile
+from re import sub
 import csv
 from config import Config
 
@@ -11,8 +12,16 @@ def get_message():
 
     result = f"{verse_location[0]} {verse_location[2]}, {verse_location[3]}"
     for translation in translations:
-        result += f"\n\n{translations[translation]}: https://www.bibleserver.com/{translation}/{verse_location[1]}%20{verse_location[2]}%2C%20{verse_location[3]}"
+        result += f"\n\n{translations[translation]}: {_get_link(config.bible_url_template, str(translation), str(verse_location[1]), str(verse_location[2]), str(verse_location[3]))}"
 
+    return result
+
+
+def _get_link(template: str, translation: str, book: str, chapter: str, verse: str):
+    result = sub(r'\{translation}', translation, template)
+    result = sub(r'\{book}', book, result)
+    result = sub(r'\{chapter}', chapter, result)
+    result = sub(r'\{verse}', verse, result)
     return result
 
 
