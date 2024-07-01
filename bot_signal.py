@@ -23,7 +23,7 @@ NL = "\n"
 msg = f'{f"{config.header}{NL}{NL}" if config.header else ""}{verselinks.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}'
 
 if config.recipients:
-    recipients = config.recipient.split(separator="|")
+    recipients = config.recipient.split("|")
     try:
         signal.sendMessage(msg, [], recipients)
     except:
@@ -34,7 +34,7 @@ if config.recipients:
 
 if config.groups:
     my_groups = signal.listGroups()
-    target_groups = config.groups.split(separator="|")
+    target_groups = config.groups.split("|")
     for my_group in my_groups:
         if my_group[2] in target_groups:
             signal.sendGroupMessage(msg, [], my_group[1])
