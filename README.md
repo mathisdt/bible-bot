@@ -47,7 +47,13 @@ Access to signal-cli is via DBus. Required settings for the bot:
 
 ## Global settings
 
-- `translations`: used to generate the links to the bible verse, example:  
-  `NIV=New International Version|ELB=Elberfelder Bibel`
 - `language`: use book names and abbreviations in this language - the file
   `books_XY.csv` has to exist in subdirectory `data` if language is set to XY
+- `translations`: used to generate the links to the bible verse, example:  
+  `NIV=New International Version|ELB=Elberfelder Bibel`  
+  (the first one is used to read the bible text, if configured - see below)
+- `text_directory`: (optional) the "raw" output directory of a run of 
+  [bibleserver-scraper](https://github.com/mathisdt/bibleserver-scraper)
+  (expected are files named 
+  "\[translation]-\[booknumber]-\[bookabbreviation]\[chapternumber].txt",
+  example: "LUT-09-1.Samuel24.txt")

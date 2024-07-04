@@ -3,7 +3,7 @@ import locale
 import logging
 import sys
 
-import verselinks
+import verse
 from config import Config
 
 locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
@@ -18,4 +18,4 @@ if len(sys.argv) >= 2:
 
 NL = "\n"
 print(
-    f'{f"{config.header}{NL}{NL}" if config.header else ""}{verselinks.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}')
+    f'{f"{config.header}{NL}{NL}" if config.header else ""}{verse.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}')

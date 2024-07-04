@@ -5,7 +5,7 @@ import sys
 
 from mastodon import Mastodon
 
-import verselinks
+import verse
 from config import Config
 
 locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
@@ -20,4 +20,4 @@ mastodon = Mastodon(
 )
 NL = "\n"
 mastodon.status_post(
-    f'{f"{config.header}{NL}{NL}" if config.header else ""}{verselinks.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}')
+    f'{f"{config.header}{NL}{NL}" if config.header else ""}{verse.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}')

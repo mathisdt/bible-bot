@@ -1,3 +1,4 @@
+import logging
 from random import randint
 from os.path import isfile
 from re import sub
@@ -9,12 +10,37 @@ def get_message():
     config = Config("global")
     translations = _get_translations(config)
     verse_location = _get_random_verse_location(config.language)
+    verse_text = _get_verse_text(config.text_directory, next(iter(translations)),
+                                 str(verse_location["book_number"]), str(verse_location["book_abbreviation"]),
+                                 str(verse_location["chapter"]), verse_location["verse"])
 
-    result = f"{verse_location[0]} {verse_location[2]}, {verse_location[3]}"
+    result = "" if not verse_text else f"{verse_text}\n\n"
+    result += f'{verse_location["book_name"]} {verse_location["chapter"]}, {verse_location["verse"]}'
     for translation in translations:
-        result += f"\n\n{translations[translation]}: {_get_link(config.bible_url_template, str(translation), str(verse_location[1]), str(verse_location[2]), str(verse_location[3]))}"
+        link = _get_link(config.bible_url_template, str(translation), str(verse_location["book_abbreviation"]),
+                         str(verse_location["chapter"]), str(verse_location["verse"]))
+        result += f'\n\n{translations[translation]}: {link}'
 
     return result
+
+
+def _get_verse_text(text_directory: str, translation_abbreviation: str, book_number: str, book_abbreviation: str,
+                    chapter: str, verse: int):
+    if not (text_directory and translation_abbreviation and book_number and book_abbreviation and chapter and verse):
+        return ""
+    filename = f"{text_directory}/{translation_abbreviation}-{book_number.zfill(2)}-{book_abbreviation}{chapter}.txt"
+    if not isfile(filename):
+        filename = f"{text_directory}/{translation_abbreviation}-{book_number.zfill(2)}-{book_abbreviation}.txt"
+    if not isfile(filename):
+        logging.log(logging.ERROR, f"file {filename} not found, neither with chapter {chapter} nor without")
+        return ""
+    with open(filename, newline='') as chapter_file:
+        lines = chapter_file.read().splitlines()
+        if len(lines) < verse - 1:
+            logging.log(logging.ERROR,
+                        f"{translation_abbreviation}: {book_abbreviation} {chapter} does not have verse {verse}")
+            return ""
+        return lines[verse - 1]
 
 
 def _get_link(template: str, translation: str, book: str, chapter: str, verse: str):
@@ -42,11 +68,12 @@ def _get_random_verse_location(language: str):
         next(books_reader)
         for books_row in books_reader:
             if int(books_row[0]) == book_id:
+                book_number = books_row[0]
                 book_abbreviation = books_row[1]
                 book_name = books_row[2]
                 book_chapter_count = int(books_row[3])
                 break
-    if book_abbreviation is None or book_name is None or book_chapter_count is None:
+    if book_number is None or book_abbreviation is None or book_name is None or book_chapter_count is None:
         raise Exception("book not found")
     chapter_number = randint(1, book_chapter_count)
 
@@ -63,7 +90,13 @@ def _get_random_verse_location(language: str):
         raise Exception("chapter not found")
     verse_number = randint(1, chapter_verse_count)
 
-    return [book_name, book_abbreviation, chapter_number, verse_number]
+    return {
+        "book_number": int(book_number),
+        "book_abbreviation": book_abbreviation,
+        "book_name": book_name,
+        "chapter": chapter_number,
+        "verse": verse_number
+    }
 
 
 def _get_translations(config: Config):

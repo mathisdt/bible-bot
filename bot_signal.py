@@ -6,7 +6,7 @@ import sys
 
 from pydbus import SystemBus
 
-import verselinks
+import verse
 from config import Config
 
 locale.setlocale(locale.LC_ALL, 'de_DE.UTF-8')
@@ -20,7 +20,7 @@ sender = re.sub(r'[^0-9]', '', config.sender)
 signal = bus.get('org.asamk.Signal', object_path=f'/org/asamk/Signal/_{sender}')
 
 NL = "\n"
-msg = f'{f"{config.header}{NL}{NL}" if config.header else ""}{verselinks.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}'
+msg = f'{f"{config.header}{NL}{NL}" if config.header else ""}{verse.get_message()}{f"{NL}{NL}{config.footer}" if config.footer else ""}'
 
 if config.recipients:
     recipients = config.recipient.split("|")
