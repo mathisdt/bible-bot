@@ -27,7 +27,7 @@ BookID,OsisID,BookName,TotalChapters
 26,Ezek,Ezekiel,48
 27,Dan,Daniel,12
 28,Hos,Hosea,14
-29,Joel,Joel,3
+29,Joel,Joel,4
 30,Amos,Amos,9
 31,Obad,Obadiah,1
 32,Jonah,Jonah,4
@@ -37,7 +37,7 @@ BookID,OsisID,BookName,TotalChapters
 36,Zeph,Zephaniah,3
 37,Hag,Haggai,2
 38,Zech,Zechariah,14
-39,Mal,Malachi,4
+39,Mal,Malachi,3
 40,Matt,Matthew,28
 41,Mark,Mark,16
 42,Luke,Luke,24
