@@ -19,7 +19,7 @@ def get_message():
     for translation in translations:
         link = _get_link(config.bible_url_template, str(translation), str(verse_location["book_abbreviation"]),
                          str(verse_location["chapter"]), str(verse_location["verse"]))
-        result += f'\n\n{translations[translation]}: {link}'
+        result += f'\n\n{translations[translation] + ": " if translations[translation] else ""}{link}'
 
     return result
 
@@ -103,6 +103,9 @@ def _get_translations(config: Config):
     translations = dict()
     abbreviations_and_names = config.translations.split("|")
     for abbreviation_and_name in abbreviations_and_names:
-        abbreviation_and_name_split = abbreviation_and_name.split("=")
-        translations[abbreviation_and_name_split[0].strip()] = abbreviation_and_name_split[1].strip()
+        if "=" in abbreviation_and_name:
+            abbreviation_and_name_split = abbreviation_and_name.split("=")
+            translations[abbreviation_and_name_split[0].strip()] = abbreviation_and_name_split[1].strip()
+        else:
+            translations[abbreviation_and_name.strip()] = None
     return translations
