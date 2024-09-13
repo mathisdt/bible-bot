@@ -9,10 +9,17 @@ from config import Config
 def get_message():
     config = Config("global")
     translations = _get_translations(config)
-    verse_location = _get_random_verse_location(config.language)
-    verse_text = _get_verse_text(config.text_directory, next(iter(translations)),
-                                 str(verse_location["book_number"]), str(verse_location["book_abbreviation"]),
-                                 str(verse_location["chapter"]), verse_location["verse"])
+    verse_location = None
+    verse_text = None
+    while not verse_location and (not config.text_directory or not verse_text):
+        try:
+            verse_location = _get_random_verse_location(config.language)
+            verse_text = _get_verse_text(config.text_directory, next(iter(translations)),
+                                         str(verse_location["book_number"]), str(verse_location["book_abbreviation"]),
+                                         str(verse_location["chapter"]), verse_location["verse"])
+        except:
+            # just retry, some verses may not be in the translation which is configured
+            pass
 
     result = "" if not verse_text else f"{verse_text}\n\n"
     result += f'{verse_location["book_name"]} {verse_location["chapter"]}, {verse_location["verse"]}'
@@ -74,7 +81,7 @@ def _get_random_verse_location(language: str):
                 book_chapter_count = int(books_row[3])
                 break
     if book_number is None or book_abbreviation is None or book_name is None or book_chapter_count is None:
-        raise Exception("book not found")
+        raise Exception(f"book not found: ID={book_id}")
     chapter_number = randint(1, book_chapter_count)
 
     chapter_verse_count = None
@@ -87,7 +94,7 @@ def _get_random_verse_location(language: str):
                 chapter_verse_count = int(chapters_row[2])
                 break
     if chapter_verse_count is None:
-        raise Exception("chapter not found")
+        raise Exception(f"chapter not found: {book_name} (BookID={book_id}) {chapter_number}")
     verse_number = randint(1, chapter_verse_count)
 
     return {
