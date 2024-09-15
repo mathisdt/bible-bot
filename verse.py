@@ -13,6 +13,8 @@ def get_message():
     verse_text = None
     while not verse_location and (not config.text_directory or not verse_text):
         try:
+            verse_location = None
+            verse_text = None
             verse_location = _get_random_verse_location(config.language)
             verse_text = _get_verse_text(config.text_directory, next(iter(translations)),
                                          str(verse_location["book_number"]), str(verse_location["book_abbreviation"]),
@@ -34,19 +36,19 @@ def get_message():
 def _get_verse_text(text_directory: str, translation_abbreviation: str, book_number: str, book_abbreviation: str,
                     chapter: str, verse: int):
     if not (text_directory and translation_abbreviation and book_number and book_abbreviation and chapter and verse):
-        return ""
+        raise Exception(f"not all required parameters given: text_directory={text_directory} translation_abbreviation={translation_abbreviation} book_number={book_number} book_abbreviation={book_abbreviation} chapter={chapter} verse={verse}")
     filename = f"{text_directory}/{translation_abbreviation}-{book_number.zfill(2)}-{book_abbreviation}{chapter}.txt"
     if not isfile(filename):
         filename = f"{text_directory}/{translation_abbreviation}-{book_number.zfill(2)}-{book_abbreviation}.txt"
     if not isfile(filename):
         logging.log(logging.ERROR, f"file {filename} not found, neither with chapter {chapter} nor without")
-        return ""
+        raise Exception(f"file {filename} not found, neither with chapter {chapter} nor without")
     with open(filename, newline='') as chapter_file:
         lines = chapter_file.read().splitlines()
         if len(lines) < verse - 1:
             logging.log(logging.ERROR,
                         f"{translation_abbreviation}: {book_abbreviation} {chapter} does not have verse {verse}")
-            return ""
+            raise Exception(f"{translation_abbreviation}: {book_abbreviation} {chapter} does not have verse {verse}")
         return lines[verse - 1]
 
 
