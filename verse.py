@@ -11,7 +11,7 @@ def get_message():
     translations = _get_translations(config)
     verse_location = None
     verse_text = None
-    while not verse_location and (not config.text_directory or not verse_text):
+    while not verse_location or (config.text_directory and not verse_text):
         try:
             verse_location = _get_random_verse_location(config.language)
             verse_text = _get_verse_text(config.text_directory, next(iter(translations)),
