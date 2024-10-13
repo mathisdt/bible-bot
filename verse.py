@@ -13,15 +13,14 @@ def get_message():
     verse_text = None
     while not verse_location and (not config.text_directory or not verse_text):
         try:
-            verse_location = None
-            verse_text = None
             verse_location = _get_random_verse_location(config.language)
             verse_text = _get_verse_text(config.text_directory, next(iter(translations)),
                                          str(verse_location["book_number"]), str(verse_location["book_abbreviation"]),
                                          str(verse_location["chapter"]), verse_location["verse"])
         except:
             # just retry, some verses may not be in the translation which is configured
-            pass
+            verse_location = None
+            verse_text = None
 
     result = "" if not verse_text else f"{verse_text}\n\n"
     result += f'{verse_location["book_name"]} {verse_location["chapter"]}, {verse_location["verse"]}'
