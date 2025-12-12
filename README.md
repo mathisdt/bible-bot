@@ -58,3 +58,8 @@ Access to signal-cli is via DBus. Required settings for the bot:
   (expected are files named 
   "\[translation]-\[booknumber]-\[bookabbreviation]\[chapternumber].txt",
   example: "LUT-09-1.Samuel24.txt")
+
+## License
+
+This project is licensed under GPL v3. If you submit or contribute changes, these are automatically licensed
+under GPL v3 as well. If you don't want that, please don't submit the contribution (e.g. pull request)!
