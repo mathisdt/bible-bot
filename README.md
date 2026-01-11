@@ -54,7 +54,7 @@ Access to signal-cli is via DBus. Required settings for the bot:
   - the part after the `=` is the displayed name and can be omitted
   - the first entry is used to read the bible text, if configured - see below
 - `text_directory`: (optional) the "raw" output directory of a run of 
-  [bibleserver-scraper](https://github.com/mathisdt/bibleserver-scraper)
+  [bibleserver-scraper](https://codeberg.org/mathisdt/bibleserver-scraper)
   (expected are files named 
   "\[translation]-\[booknumber]-\[bookabbreviation]\[chapternumber].txt",
   example: "LUT-09-1.Samuel24.txt")
